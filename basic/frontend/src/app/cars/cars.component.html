@@ -1,0 +1,6 @@
+<h1>List of cars 🚗</h1>
+<div>
+  <ul>
+    <li *ngFor="let car of cars">{{ car.make }} -  {{ car.model }} | <span><a [routerLink]="['car', car.id]">View more</a></span></li>
+  </ul> 
+</div>

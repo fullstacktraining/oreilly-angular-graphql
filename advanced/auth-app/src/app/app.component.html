@@ -1,0 +1,21 @@
+<nav>
+  <ul>
+    <li>
+      <a routerLink="/">Home</a>
+    </li>
+    <li *ngIf="currentUser">
+      <a routerLink="/profile">Profile</a>
+    </li>
+    <li *ngIf="currentUser">
+      <a routerLink="/hidden" >Hidden</a>
+    </li>
+    <li *ngIf="!currentUser">
+      <a routerLink="/login">Login</a>
+    </li>
+    <li *ngIf="currentUser">
+      <a routerLink="/logout" (click)="logout()">Logout</a>
+    </li>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>

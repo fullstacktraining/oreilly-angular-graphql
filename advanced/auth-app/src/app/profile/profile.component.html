@@ -1,0 +1,14 @@
+<div *ngIf="me">
+  <h1>Welcome, {{ me.name }}</h1>
+  <img src="https://res.cloudinary.com/tamas-demo/image/upload/w_100,h_100,c_thumb,g_face,r_20/avatar.png" alt="" *ngIf="!me.photo && !temporaryPhotoUrl" />
+  <img [src]="me.photo" alt="" *ngIf="me.photo" />
+  <img [src]="temporaryPhotoUrl" alt="" *ngIf="temporaryPhotoUrl" />
+  <input type="file" (change)="handleFileInput($event.target.files)" /><button (click)="handleUpload()">Upload</button>
+  <ul>
+    <li *ngFor="let car of me.car">{{ car.make }} {{ car.model }}</li>
+  </ul>
+</div>
+
+{{ user | json }}
+
+<!-- {{ me | json }} -->
