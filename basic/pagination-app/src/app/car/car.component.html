@@ -1,0 +1,7 @@
+<div *ngIf="car">
+  <h1>{{ car.make }} {{ car.model }}</h1>
+  <p>Colour: <span [ngStyle]="{'color': car.colour.toLowerCase()}">{{ car.colour }}</span></p>
+  <p>Max speed: {{ car.speed }}</p>
+  <p>Year: {{ car.year }}</p>
+  <p><a href="/">Go back</a></p>
+</div>

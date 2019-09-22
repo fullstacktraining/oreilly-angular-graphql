@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Apollo } from 'apollo-angular';
+import { Subscription } from 'rxjs';
 import gql from 'graphql-tag';
 
 const query = gql`
@@ -19,14 +20,25 @@ const query = gql`
   styleUrls: ['./cars.component.css']
 })
 
-export class CarsComponent implements OnInit {
+export class CarsComponent implements OnInit, OnDestroy {
   cars: any[] = [];
-  constructor(private apollo: Apollo) {
-    this.apollo.watchQuery({
+  loading: boolean;
+  private querySub: Subscription;
+
+  constructor(private apollo: Apollo) { }
+  
+  ngOnInit() {
+    this.querySub = this.apollo.watchQuery({
       query
-    }).valueChanges.subscribe(results => {
-      this.cars = (results.data as any).cars;
+    })
+    .valueChanges
+    .subscribe(({ data, loading }) => {
+      this.loading = loading;
+      this.cars = data['cars'];
     });
   }
-  ngOnInit() {}
+  
+  ngOnDestroy() {
+    this.querySub.unsubscribe();
+  }
 }

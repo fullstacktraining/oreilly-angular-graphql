@@ -9,7 +9,7 @@ module.exports = {
 };
 
 /*
-cars: async (_, { pageSize = 500, after }, { dataSources }) => {
+cars: async (_, { pageSize = 10, after }, { dataSources }) => {
       const allCars = await dataSources.carAPI.getCars();
 
       const cars = paginateResults({
