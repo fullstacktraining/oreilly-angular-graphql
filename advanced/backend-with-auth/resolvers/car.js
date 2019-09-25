@@ -34,7 +34,6 @@ const resolvers = {
   },
   Car: {
     owner: (parent, args, { models }) => {
-      console.log(parent);
       // SELECT * FROM users WHERE id = `parent.userId`;
       return models.User.findByPk(parent.userId);
     }

@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-
+// replace database user * password to match your setup
 const sequelize = new Sequelize('graphql', 'root', 'marina', {
   dialect: 'mysql',
   define: {

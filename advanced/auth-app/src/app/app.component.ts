@@ -15,6 +15,9 @@ export class AppComponent {
   }
 
   logout() {
+    if (localStorage.getItem('temporaryPhotoUrl')) {
+      localStorage.removeItem('temporaryPhotoUrl');
+    }
     this.authService.logout();
     this.router.navigate(['/']);
   }

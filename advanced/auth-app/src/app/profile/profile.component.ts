@@ -58,18 +58,15 @@ export class ProfileComponent implements OnInit {
   }
 
   handleFileInput(files) {
-    console.log(files);
     this.fileToUpload = files[0];
   }
 
   handleUpload() {
     const data = new FormData();
-    console.log(this.fileToUpload);
     data.append('file', this.fileToUpload, this.fileToUpload.name);
 
     this.http.post('http://localhost:3000/upload', data).toPromise()
     .then((response: any) => {
-      console.log(response);
       return response;
     })
     .then(filename => {
@@ -79,7 +76,6 @@ export class ProfileComponent implements OnInit {
           filename
         }
       }).subscribe(({ data }: any) => {
-        console.log('data', data);
         const user = gql`
         query {
           user(id: ${this.me.id}) {
@@ -93,7 +89,6 @@ export class ProfileComponent implements OnInit {
         })
         .valueChanges
         .subscribe(({ data, loading }) => {
-          console.log('data again', data)
           this.temporaryPhotoUrl = data.user.photo;
           localStorage.setItem('temporaryPhotoUrl', this.temporaryPhotoUrl);
         });

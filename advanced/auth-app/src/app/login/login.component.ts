@@ -18,11 +18,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService
-  ) {
-    // if (this.authService.currentUser) {
-    //   this.router.navigate(['/']);
-    // }
-  }
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -37,12 +33,9 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.authService.login(this.loginForm.controls.username.value, this.loginForm.controls.password.value).subscribe(({ data }) => {
-      console.log('subscribe');
       const token = data['login'].token;
       localStorage.setItem('token', token);
       this.router.navigate(['/profile']);
-      console.log('hello');
-      console.log(this.router.navigate(['/profile']));
       this.authService.currentUserSubject.next(token);
     }, (error) => {
       this.error = error;
