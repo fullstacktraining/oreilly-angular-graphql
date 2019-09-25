@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { Apollo } from 'apollo-angular';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   currentUser;
-  constructor (private authService: AuthService, private router: Router,
+  constructor (private authService: AuthService, private router: Router, private apollo: Apollo
     ) {
     this.authService.currentUser.subscribe(user => this.currentUser = user);
   }
@@ -18,6 +19,7 @@ export class AppComponent {
     if (localStorage.getItem('temporaryPhotoUrl')) {
       localStorage.removeItem('temporaryPhotoUrl');
     }
+    this.apollo.getClient().resetStore();
     this.authService.logout();
     this.router.navigate(['/']);
   }
